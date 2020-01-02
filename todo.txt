@@ -1,0 +1,42 @@
+############################# Components #############################
+
+- Nav
+--> Home, Categories, LeaderBoard, CreatePoll, Search-TextField*, Login 
+
+- Login
+--> DDL für die Auswahl eines existierenden Benutzers, Name und Avatar des aktuell eingeloggten Nutzers, Logout-Möglichkeit
+
+- Home
+--> Stellt die Nav bar im Header, die PollList und die UserInfo dar. Nur sichtbar, wenn der User eingeloggt ist.
+
+- Userinfo
+--> Stellt Userbezogene Infos dar
+
+- PoolList
+--> Toggle-Möglichkeit für beantwortete/unbeantwortete Polls, absteigend geordnet nach Erstelldatum, unbeantwortete Polls default	
+
+- Poll
+--> View um Informationen zur Poll darzustellen (unbeantwortet: Frage, Optionen, Avatar des Erstellers, beantwortet: wie unbeantwortet, zusätzlich pro Option noch Anzahl/Prozentsatz User die Option gewählt haben, farbliche Umrandung der Option, die der eingeloggte User gewählt hat, Poll muss auf dem Dashboard dann bei 'beantwortete Polls' stehen)
+
+- CreatePoll
+--> Fixes Label ist "Would you rather", Ein Eingabefeld pro Option. Bei Submit -> Poll im BE speichern, Redirect zu Homepage, Poll sollte auf der Poll-List für unbeantwortete Fragen erscheinen
+
+- LeaderBoard
+--> User name, avatar, Anzahl der gestellten und beantworteten Fragen, soll in absteigender Reihenfolge anhand der Summe der gestellten + beantworteten Fragen sein
+
+- CreateUser *
+--> User infos die benötigt werden, um einen User zu erstellen
+
+############################# Actions #############################
+- AuthedUser
+--> setAuthedUser
+
+- Users
+--> receiveUsers
+--> updateUserAnswers(pollId, answer)
+--> addUser*
+
+- Questions
+--> receiveQuestions
+--> addQuestions
+--> deleteQuestions*
