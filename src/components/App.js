@@ -8,6 +8,7 @@ import NavigationBar from './NavigationBar'
 import LeaderBoard from './LeaderBoard'
 import CreateQuestion from './CreateQuestion'
 import Question from './Question'
+import User from './User'
 
 class App extends Component {
   componentDidMount() {
@@ -21,12 +22,13 @@ class App extends Component {
 				<LoadingBar />
       			<NavigationBar />
       			{this.props.loggedOut 
-      				? null
+      				? <p>Please log in first!</p>
                 	: <div>
 						<Route path='/' exact component={Home} />
-                    	Route path='/leaderboard' component={LeaderBoard} />
-                    	Route path='/add' component={CreateQuestion} />
-						Route path='/questions/:question_id' component={Question} />
+                    	<Route path='/leaderboard' component={LeaderBoard} />
+                    	<Route path='/add' component={CreateQuestion} />
+						<Route path='/questions/:question_id' component={Question} />
+						<Route path='/users/:user_id' component={User} />
 					  </div>
 					}
       		</Fragment>

@@ -1,68 +1,61 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { setAuthedUser } from '../actions/authedUser'
+import { Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class Login extends Component {
-	
-  	state = {
-    	chosenUserId: '',
-    	toHome: false
-    }
   	
-	createUserDropDownList = (users) => {
-    	users.map((user) => <option value={user.id}>{user.id}</option>)
+	handleUserLogin = (userId) => {
+    	const { dispatch } = this.props
+		
+        dispatch(setAuthedUser(userId))
     }
 	
-    handleSelectionEvent = (evt) => {
-		const authedUserId = evt.target.value
-        
-        this.setState({
-        	chosenUserId: authedUserId
-        })
-	}
-	
-  	handleSubmit = (evt) => {
-    	evt.preventDefault()
-      	
-      	const { chosenUser } = this.state
-        const { dispatch } = this.props
-        
-        dispatch(setAuthedUser(chosenUser))
-    	
-      	this.setState({
-        	chosenUserId: '',
-          	toHome: true
-        })
+	createDopdownEntries() {
+    	const { users } = this.props
+		
+		return Object.keys(users).map((key) => <DropdownItem key={key} onClick={() => this.handleUserLogin(key)}>{key}</DropdownItem>)
     }
-  
-  	render() {
-		const { chosenUser, toHome } = this.state
 
-      	if(toHome) {
-			return <Redirect to='/' />
-		}
-                
+	handleUserLogout() {
+		const { dispatch } = this.props
+		
+        dispatch(setAuthedUser(null))
+    }
+	
+	createLoggedOutView() {
+		return <UncontrolledDropdown>
+            <DropdownToggle caret size='sm'>Login as</DropdownToggle>
+            <DropdownMenu>
+				{ this.createDopdownEntries() }
+            </DropdownMenu>
+		</UncontrolledDropdown>
+    }
+
+	createLoggedInView(loggedInUserId) {
+      	const loggedInUser = this.props.users[loggedInUserId]
+      	
+      	return <UncontrolledDropdown>
+            <DropdownToggle caret size='sm'>Logged in as { loggedInUserId } <img src={loggedInUser.avatarURL} alt={`(avatar of ${loggedInUserId})`} /></DropdownToggle>
+            <DropdownMenu>
+				<DropdownItem onClick={() => this.handleUserLogout()}>Logout</DropdownItem>
+            </DropdownMenu>
+		</UncontrolledDropdown>
+    }
+
+  	render() {
+      	const { authedUser } = this.props
+      	
     	return (
-        	<div>
-          		<form onSubmit={this.handleSubmit}>
-					<label for="authedUser">Male</label>
-					<select id='authedUser' onChange={this.handleSelectionEvent}>
-						{
-                        	this.createUserDropDownList(this.props.users)
-                        }
-					</select>
-					<button type='submit' disabled={chosenUser === {}}>
-                        Login
-                    </button>
-				</form>
-          	</div>
+          <Nav>
+			{ authedUser === null ? this.createLoggedOutView() : this.createLoggedInView(authedUser) }
+          </Nav>
         )
     }
 }
 
-function mapStateToPros({ users }) {
-	return { users }
+function mapStateToProps({ users, authedUser }) {
+	return { users, authedUser }
 }
 
-export default connect(mapStateToPros)(Login)
+export default connect(mapStateToProps)(Login)

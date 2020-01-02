@@ -1,10 +1,10 @@
 ############################# Components #############################
 
 - Nav
---> Home, Categories, LeaderBoard, CreatePoll, Search-TextField*, Login 
+--> Home, Categories, LeaderBoard, CreatePoll, Search-TextField*, Login (gemacht, außer optionale Eingabe der QuestionId)
 
 - Login
---> DDL für die Auswahl eines existierenden Benutzers, Name und Avatar des aktuell eingeloggten Nutzers, Logout-Möglichkeit
+--> DDL für die Auswahl eines existierenden Benutzers, Name und Avatar des aktuell eingeloggten Nutzers, Logout-Möglichkeit (check)
 
 - Home
 --> Stellt die Nav bar im Header, die PollList und die UserInfo dar. Nur sichtbar, wenn der User eingeloggt ist.
@@ -40,3 +40,6 @@
 --> receiveQuestions
 --> addQuestions
 --> deleteQuestions*
+
+######## TODOS ########
+- Add avatar pictures
