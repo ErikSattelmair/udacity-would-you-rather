@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import {
-  Card, Button, CardImg, CardTitle, CardText, CardColumns,
+  Card, Button, CardImg, CardTitle, CardText, Container, Row, Col,
   CardSubtitle, CardBody
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
@@ -16,7 +16,7 @@ class LeaderBoard extends Component {
 			const numberOfQuestionsAsked = this.getNumberOfAskedQuestions(user)
 			const numberOfQuestionsAnswered = this.getNumberOfAnsweredQuestions(user)
             
-            return <Card key={userId}>
+            return <Col sm={3} key={userId}><Card>
                   <CardImg top width="100%" src={user.avatarURL} alt="Card image cap" />
                   <CardBody>
                       <CardTitle><b>{rank + 1}.</b> {user.name}</CardTitle>
@@ -27,7 +27,7 @@ class LeaderBoard extends Component {
           			  	<Button>Go to user profile</Button>
           			  </Link>
                   </CardBody>
-            </Card>
+            </Card></Col>
         	}
 		)
     }
@@ -54,9 +54,11 @@ class LeaderBoard extends Component {
     	return (
         	<Fragment>
       			<h3 className='text-center'>LeaderBoard</h3>
-				<CardColumns>
-               		{ this.createLeaderBoardCards() }
-				</CardColumns>
+				<Container>
+             		<Row>
+               			{ this.createLeaderBoardCards() }
+            		</Row>
+				</Container>
       		</Fragment>
         )
     }
