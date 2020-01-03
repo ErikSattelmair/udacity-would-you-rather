@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Question extends Component {
-	render() {
-    	return (
-        	<div>Question</div>
-        )
-    }
+const Question = (props) => {
+	return (
+		<div>
+      		<p className='font-weight-bold'><u>Would you rather</u></p>
+      		<p>Options...</p>
+          	<p>Created by {}</p>
+    	</div>
+	)
 }
 
 export default Question

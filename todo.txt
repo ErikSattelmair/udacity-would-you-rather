@@ -1,16 +1,13 @@
 ############################# Components #############################
 
-- Nav
---> Home, Categories, LeaderBoard, CreatePoll, Search-TextField*, Login (gemacht, außer optionale Eingabe der QuestionId)
+- Nav (check, außer optionale Eingabe der QuestionId)
+--> Home, Categories, LeaderBoard, CreatePoll, Search-TextField*, Login 
 
-- Login
---> DDL für die Auswahl eines existierenden Benutzers, Name und Avatar des aktuell eingeloggten Nutzers, Logout-Möglichkeit (check)
+- Login (check)
+--> DDL für die Auswahl eines existierenden Benutzers, Name und Avatar des aktuell eingeloggten Nutzers, Logout-Möglichkeit
 
 - Home
---> Stellt die Nav bar im Header, die PollList und die UserInfo dar. Nur sichtbar, wenn der User eingeloggt ist.
-
-- Userinfo
---> Stellt Userbezogene Infos dar
+--> Stellt die Nav bar im Header, die PollList dar. Nur sichtbar, wenn der User eingeloggt ist.
 
 - PoolList
 --> Toggle-Möglichkeit für beantwortete/unbeantwortete Polls, absteigend geordnet nach Erstelldatum, unbeantwortete Polls default	
@@ -18,11 +15,11 @@
 - Poll
 --> View um Informationen zur Poll darzustellen (unbeantwortet: Frage, Optionen, Avatar des Erstellers, beantwortet: wie unbeantwortet, zusätzlich pro Option noch Anzahl/Prozentsatz User die Option gewählt haben, farbliche Umrandung der Option, die der eingeloggte User gewählt hat, Poll muss auf dem Dashboard dann bei 'beantwortete Polls' stehen)
 
-- CreatePoll
+- CreatePoll (check)
 --> Fixes Label ist "Would you rather", Ein Eingabefeld pro Option. Bei Submit -> Poll im BE speichern, Redirect zu Homepage, Poll sollte auf der Poll-List für unbeantwortete Fragen erscheinen
 
-- LeaderBoard
---> User name, avatar, Anzahl der gestellten und beantworteten Fragen, soll in absteigender Reihenfolge anhand der Summe der gestellten + beantworteten Fragen sein
+- LeaderBoard (check)
+--> User name, avatar, Anzahl der gestellten und beantworteten Fragen, soll in absteigender Reihenfolge anhand der Summe der gestellten + beantworteten Fragen sein 
 
 - CreateUser *
 --> User infos die benötigt werden, um einen User zu erstellen
@@ -32,14 +29,16 @@
 --> setAuthedUser
 
 - Users
---> receiveUsers
+--> receiveUsers (check)
 --> updateUserAnswers(pollId, answer)
 --> addUser*
 
 - Questions
---> receiveQuestions
---> addQuestions
+--> receiveQuestions (check)
+--> addQuestions (check)
 --> deleteQuestions*
 
 ######## TODOS ########
 - Add avatar pictures
+- Add form highliting for missing entries
+- Add Redirect when login/logout is performed

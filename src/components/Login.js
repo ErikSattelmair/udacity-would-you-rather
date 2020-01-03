@@ -4,7 +4,7 @@ import { setAuthedUser } from '../actions/authedUser'
 import { Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class Login extends Component {
-  	
+  
 	handleUserLogin = (userId) => {
     	const { dispatch } = this.props
 		
@@ -44,12 +44,12 @@ class Login extends Component {
     }
 
   	render() {
-      	const { authedUser } = this.props
+		const { authedUser } = this.props
       	
     	return (
-          <Nav>
-			{ authedUser === null ? this.createLoggedOutView() : this.createLoggedInView(authedUser) }
-          </Nav>
+            <Nav>
+              { authedUser === null ? this.createLoggedOutView() : this.createLoggedInView(authedUser) }
+            </Nav>
         )
     }
 }

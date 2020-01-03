@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import {
-  Card, Button, CardImg, CardTitle, CardText, Container, Row, Col,
+  Card, CardImg, CardTitle, CardText, Container, Row, Col,
   CardSubtitle, CardBody
 } from 'reactstrap';
-import { Link } from 'react-router-dom'
 
 class LeaderBoard extends Component {
   	
@@ -16,16 +15,13 @@ class LeaderBoard extends Component {
 			const numberOfQuestionsAsked = this.getNumberOfAskedQuestions(user)
 			const numberOfQuestionsAnswered = this.getNumberOfAnsweredQuestions(user)
             
-            return <Col sm={3} key={userId}><Card>
-                  <CardImg top width="100%" src={user.avatarURL} alt="Card image cap" />
+            return <Col sm={4} key={userId} className='mt-3'><Card>
+                  <CardImg top width="100%" src={user.avatarURL} alt={`Avatar of ${userId}`} />
                   <CardBody>
-                      <CardTitle><b>{rank + 1}.</b> {user.name}</CardTitle>
+                      <CardTitle><b>{rank + 1}.</b> {userId}</CardTitle>
                       <CardSubtitle>Statistic Summary</CardSubtitle>
           			  <br />
                       <CardText>Questions answered: {numberOfQuestionsAnswered}<br />Questions asked: {numberOfQuestionsAsked}</CardText>
-					  <Link to={'users/' + userId}>  
-          			  	<Button>Go to user profile</Button>
-          			  </Link>
                   </CardBody>
             </Card></Col>
         	}
