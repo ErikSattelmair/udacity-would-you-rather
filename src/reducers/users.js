@@ -12,7 +12,7 @@ export default function users(state = {}, action) {
         
         const currentAnswers = state[authedUser].answers
         const isAnswerPresentAlready = currentAnswers[questionId] !== undefined
-        const updatedAnswers = !isAnswerPresentAlready ? Object.assign({currentAnswers}, {questionId: answer}) : currentAnswers
+        const updatedAnswers = !isAnswerPresentAlready ? Object.assign({...currentAnswers}, {[questionId]: answer}) : currentAnswers
         
         return {
     		...state,

@@ -14,11 +14,9 @@ export function receiveUsers(users) {
 function updateUserAnswers(authedUserId, questionId, answer) {
 	return {
     	type: UPDATE_USER_ANSWERS,
-      	payload: {
-        	questionId: questionId,
-        	answer: answer,
-          	authedUser: authedUserId
-        }
+       	questionId: questionId,
+        answer: answer,
+        authedUser: authedUserId
     }
 }
 

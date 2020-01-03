@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import LoadingBar from 'react-redux-loading'
@@ -9,6 +9,8 @@ import LeaderBoard from './LeaderBoard'
 import CreateQuestion from './CreateQuestion'
 import Question from './Question'
 import QuestionList from './QuestionList'
+import NotFound from './NotFound'
+import LoggedOut from './LoggedOut'
 
 class App extends Component {
   componentDidMount() {
@@ -22,13 +24,17 @@ class App extends Component {
 				<LoadingBar />
       			<NavigationBar />
       			{this.props.loggedOut 
-      				? <p>Please log in first!</p>
+      				? <LoggedOut />
                 	: <div className='ml-5 mr-5 mt-1'>
-						<Route path='/' exact component={Home} />
-                    	<Route path='/leaderboard' component={LeaderBoard} />
-                    	<Route path='/add' component={CreateQuestion} />
-						<Route path='/question/:question_id' component={Question} />
-						<Route path='/questions/:question_selector' component={QuestionList} />
+						<Switch>
+                            <Route path='/' exact component={Home} />
+                            <Route path='/leaderboard' exact component={LeaderBoard} />
+                            <Route path='/add' exact component={CreateQuestion} />
+                            <Route path='/question/:question_id' exact component={Question} />
+                            <Route path='/questions/:question_selector' exact component={QuestionList} />
+							<Route path='/404' exact component={NotFound} />
+							<Route component={NotFound} />
+						</Switch>
 					  </div>
 					}
       		</Fragment>
