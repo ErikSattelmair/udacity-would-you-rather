@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleUpdateUserAnswer } from '../actions/users'
 import { updateQuestionAnswers } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
 import { 
   Label, Input, Form, FormGroup, Card, CardImg, CardTitle,
   CardSubtitle, CardBody
@@ -59,6 +60,10 @@ class Question extends Component {
     }
 	
   	render() {
+      	if(this.props.showNotFoudPage) {
+			return <Redirect to={'/404'} />
+        }
+      	
       	const { question, questionAuthor } = this.props
 		const { timestamp, optionOne, optionTwo } = question
 		const authedUserVoted = this.isQuestionAnswered()
@@ -105,7 +110,11 @@ class Question extends Component {
 function mapStateToProps({ authedUser, users, questions }, props) {
 	const questionId = props.questionId !== undefined ? props.questionId : props.match.params.question_id
 	const question = questions[questionId]
-
+	
+	if(question === undefined) {
+		return { showNotFoudPage: true }
+	}
+	
 	return {
     	authedUser,
       	question: question,

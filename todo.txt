@@ -26,7 +26,7 @@
 
 ############################# Actions #############################
 - AuthedUser
---> setAuthedUser
+--> setAuthedUser (check)
 
 - Users
 --> receiveUsers (check)
@@ -42,5 +42,3 @@
 - Add avatar pictures
 - Add form highliting for missing entries
 - Add Redirect when login/logout is performed
-- Implement 404 page
-- Enhance Redirect to 404 page if question(s) not found
