@@ -11,6 +11,7 @@ import Question from './Question'
 import QuestionList from './QuestionList'
 import NotFound from './NotFound'
 import LoggedOut from './LoggedOut'
+import CreateUser from './CreateUser'
 
 class App extends Component {
   componentDidMount() {
@@ -24,7 +25,10 @@ class App extends Component {
 				<LoadingBar />
       			<NavigationBar />
       			{this.props.loggedOut 
-      				? <LoggedOut />
+      				? 	<Switch>
+                 			<Route path='/add_user' exact component={CreateUser} />
+							<Route component={LoggedOut} />
+						</Switch>
                 	: <div className='ml-5 mr-5 mt-1'>
 						<Switch>
                             <Route path='/' exact component={Home} />

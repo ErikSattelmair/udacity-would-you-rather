@@ -51,22 +51,25 @@ class CreateQuestion extends Component {
         const submitButtonDisabled = !this.inputValid()
                 
     	return (
-        	<Form>
-          		<FormGroup>
-             		<FormText className='font-weight-bold h3'>Would you rather:</FormText>
-              	</FormGroup>
-             	<FormGroup>
-             		<Label for="optionOne">Option One</Label>
-        			<Input type="text" name="optionOne" id="optionOne" placeholder="Enter text for option one here..." onChange={(e) => this.handleChangeOptionOne(e.target.value)} />
-              	</FormGroup>
-				<FormGroup>
-					<Label for="optionTwo">Option Two</Label>
-        			<Input type="text" name="optionTwo" id="optionTwo" placeholder="Enter text for option two here..." onChange={(e) => this.handleChangeOptionTwo(e.target.value)} />
-				</FormGroup>
-				<FormGroup>
-					<Button disabled={submitButtonDisabled} onClick={(e) => this.handleSubmit(e)}>Submit Questions</Button>
-				</FormGroup>
-          	</Form>
+          	<div>
+      			<h3 className='text-center'>Create a Question</h3>
+                <Form>
+                    <FormGroup>
+                        <FormText className='font-weight-bold h4'>Would you rather:</FormText>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="optionOne">Option One</Label>
+                        <Input type="text" name="optionOne" id="optionOne" placeholder="Enter text for option one here..." onChange={(e) => this.handleChangeOptionOne(e.target.value)} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="optionTwo">Option Two</Label>
+                        <Input type="text" name="optionTwo" id="optionTwo" placeholder="Enter text for option two here..." onChange={(e) => this.handleChangeOptionTwo(e.target.value)} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Button disabled={submitButtonDisabled} onClick={(e) => this.handleSubmit(e)}>Submit Question</Button>
+                    </FormGroup>
+                </Form>
+			</div>
         )
     }
 }

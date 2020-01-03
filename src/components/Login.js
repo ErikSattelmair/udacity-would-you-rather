@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
   
@@ -24,19 +25,22 @@ class Login extends Component {
     }
 	
 	createLoggedOutView() {
-		return <UncontrolledDropdown>
-            <DropdownToggle caret size='sm'>Login as</DropdownToggle>
-            <DropdownMenu>
-				{ this.createDopdownEntries() }
-            </DropdownMenu>
-		</UncontrolledDropdown>
+		return <Fragment>
+      				<UncontrolledDropdown>
+						<DropdownToggle caret size='sm'>Login as</DropdownToggle>
+						<DropdownMenu>
+							{ this.createDopdownEntries() }
+						</DropdownMenu>
+              		</UncontrolledDropdown>
+              		<Link to={'add_user'}><Button size='sm'>Create New Account</Button></Link>
+			</Fragment>
     }
 
 	createLoggedInView(loggedInUserId) {
       	const loggedInUser = this.props.users[loggedInUserId]
-      	
+
       	return <UncontrolledDropdown>
-            <DropdownToggle caret size='sm'>Logged in as { loggedInUserId } <img src={loggedInUser.avatarURL} alt={`(avatar of ${loggedInUserId})`} /></DropdownToggle>
+            <DropdownToggle caret size='sm'>Welcome, { loggedInUserId } <img src={loggedInUser.avatarURL} alt={`(avatar of ${loggedInUserId})`} /></DropdownToggle>
             <DropdownMenu>
 				<DropdownItem onClick={() => this.handleUserLogout()}>Logout</DropdownItem>
             </DropdownMenu>

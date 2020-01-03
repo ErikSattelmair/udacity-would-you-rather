@@ -13,18 +13,22 @@ class QuestionList extends Component {
     	return (
           	<div>
 				<h3 className='text-center'>{this.props.answered ? 'Answered' : 'Unanswered'} Questions</h3>
-          		<ListGroup flush>
-					{this.props.relevantQuestions.map((question) => {
-						return <ListGroupItem key={question.id}><Question questionId={question.id}/></ListGroupItem>
-              		})}
-            	</ListGroup>
+      			<ListGroup flush>
+                    {this.props.relevantQuestions.length === 0 ? (
+                        <ListGroupItem>No entries to show</ListGroupItem>
+                    ) : (
+                      this.props.relevantQuestions.map((question) => {
+                              return <ListGroupItem key={question.id}><Question questionId={question.id}/></ListGroupItem>
+                          })
+                    )}
+				</ListGroup>
       		</div>
         )
     }
 }
 
 function mapStateToProps({ questions, authedUser }, props) {
-  	const { question_selector } = props.match.params
+  	const question_selector = props.questionSelector !== undefined ? props.questionSelector : props.match.params.question_selector
 	const querySelectorValid = question_selector === 'answered' || question_selector === 'unanswered'
     
     if(!querySelectorValid) {
@@ -45,6 +49,8 @@ function mapStateToProps({ questions, authedUser }, props) {
         if(!answered && !votedOnQuestion) {
         	return question
         }
+      	
+      	return null
     }).sort((questionOne, questionTwo) => {
     	return questionTwo.timestamp - questionOne.timestamp
     })

@@ -300,3 +300,28 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
     }, 500)
   })
 }
+
+export function _saveUser(username, name, avatar) {
+	return new Promise((res, rej) => {
+        setTimeout(() => {
+            const newUser = createUser(username, name, avatar)
+          	
+          	users = {
+              ...users,
+              [username]: newUser
+            }
+
+            res(newUser)
+		}, 1000)
+	})
+}
+
+function createUser(username, name, avatar) {
+	return {
+        id: username,
+        name: name,
+        avatarURL: avatar,
+        answers: {},
+		questions: []
+    }
+}

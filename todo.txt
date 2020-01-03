@@ -21,7 +21,7 @@
 - LeaderBoard (check)
 --> User name, avatar, Anzahl der gestellten und beantworteten Fragen, soll in absteigender Reihenfolge anhand der Summe der gestellten + beantworteten Fragen sein 
 
-- CreateUser *
+- CreateUser * (check)
 --> User infos die benötigt werden, um einen User zu erstellen
 
 ############################# Actions #############################
@@ -30,8 +30,8 @@
 
 - Users
 --> receiveUsers (check)
---> updateUserAnswers(pollId, answer)
---> addUser*
+--> updateUserAnswers(pollId, answer) (check)
+--> addUser* (check)
 
 - Questions
 --> receiveQuestions (check)
@@ -40,5 +40,4 @@
 
 ######## TODOS ########
 - Add avatar pictures
-- Add form highliting for missing entries
 - Add Redirect when login/logout is performed
