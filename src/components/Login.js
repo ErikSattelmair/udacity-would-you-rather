@@ -2,33 +2,14 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { Button, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
   	
-  	state = {
-    	prevPath: ''
-    }
-  	
-  	componentWillReceiveProps(nextProps) {
-  		this.setState({
-    		prevPath: this.props.location
-    	})
-    }
-  	
 	handleUserLogin = (userId) => {
-    	const { dispatch, history } = this.props
-		const { prevPath } = this.state
+    	const { dispatch } = this.props
         
         dispatch(setAuthedUser(userId))
-      	
-      	console.log(prevPath.pathname)
-      	if(prevPath.pathname.includes('/question/')) {
-			history.push(prevPath.pathname)
-        } else {
-        	history.push('/')
-        }
-      	
     }
 	
 	createDopdownEntries() {
@@ -83,4 +64,4 @@ function mapStateToProps({ users, authedUser }) {
 	return { users, authedUser }
 }
 
-export default withRouter(connect(mapStateToProps)(Login))
+export default connect(mapStateToProps)(Login)
