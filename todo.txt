@@ -43,6 +43,5 @@
 - Add statistic section to answered questions including visualization pie chart of
 - Add search bar in Header
 - Add delete option for questions of authed user
-- Add Redirect when login/logout is performed, either to Home or to sepcific question
 - Finish Home
 - Add avatar pictures

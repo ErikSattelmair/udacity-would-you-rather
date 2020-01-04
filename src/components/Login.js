@@ -22,8 +22,6 @@ class Login extends Component {
 		const { dispatch, history } = this.props
 		
         dispatch(setAuthedUser(null))
-		
-		history.push('/')
     }
 	
 	createLoggedOutView() {
