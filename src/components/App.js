@@ -24,23 +24,23 @@ class App extends Component {
 			<Fragment>
 				<LoadingBar />
       			<NavigationBar />
+      			<div className='ml-5 mr-5 mt-1'>
       			{this.props.loggedOut 
       				? 	<Switch>
-                 			<Route path='/add_user' exact component={CreateUser} />
-							<Route component={LoggedOut} />
+							<Route path='/add_user' exact component={CreateUser} />
+                            <Route component={LoggedOut} />
 						</Switch>
-                	: <div className='ml-5 mr-5 mt-1'>
-						<Switch>
-                            <Route path='/' exact component={Home} />
-                            <Route path='/leaderboard' exact component={LeaderBoard} />
+                	: 	<Switch>
+                      		<Route path='/' exact component={Home} />
+                        	<Route path='/leaderboard' exact component={LeaderBoard} />
                             <Route path='/add' exact component={CreateQuestion} />
-                            <Route path='/question/:question_id' exact component={Question} />
-                            <Route path='/questions/:question_selector' exact component={QuestionList} />
+                            <Route path='/questions/:question_id' exact component={Question} />
+                            <Route path='/category/:category' exact component={QuestionList} />
 							<Route path='/404' exact component={NotFound} />
 							<Route component={NotFound} />
 						</Switch>
-					  </div>
 					}
+				</div>
       		</Fragment>
       	</Router>
     );

@@ -39,8 +39,8 @@ class NavigationBar extends Component {
                           <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                               <DropdownToggle nav caret>Categories</DropdownToggle>
                               <DropdownMenu>
-                                  <DropdownItem><NavLink tag={Link} to="/questions/unanswered">Unanswered Questions</NavLink></DropdownItem>
-                                  <DropdownItem><NavLink tag={Link} to="/questions/answered">Answered Questions</NavLink></DropdownItem>
+                                  <DropdownItem><NavLink tag={Link} to="/category/unanswered">Unanswered Questions</NavLink></DropdownItem>
+                                  <DropdownItem><NavLink tag={Link} to="/category/answered">Answered Questions</NavLink></DropdownItem>
                               </DropdownMenu>
                           </Dropdown>
                           <NavItem>

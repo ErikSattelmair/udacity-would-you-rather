@@ -20,9 +20,9 @@ class Home extends Component {
     	return (
         	<div>
       			<h3 className='text-center'>Home</h3>
-				<ButtonToggle color='secondary' value='unanswered' onClick={(evt) => this.handleToggle(evt)} >Unanswered Questions</ButtonToggle>{' '}
+				<ButtonToggle color='secondary' value='unanswered' onClick={(evt) => this.handleToggle(evt)}>Unanswered Questions</ButtonToggle>{' '}
 				<ButtonToggle color='secondary' value='answered' onClick={(evt) => this.handleToggle(evt)}>Answered Questions</ButtonToggle>
-				<QuestionList questionSelector={this.state.show} />
+				<QuestionList category={this.state.show} />
 			</div>
         )
     }

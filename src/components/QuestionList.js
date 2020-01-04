@@ -13,7 +13,7 @@ class QuestionList extends Component {
     	return (
           	<div>
 				<h3 className='text-center'>{this.props.answered ? 'Answered' : 'Unanswered'} Questions</h3>
-      			<ListGroup flush>
+      			<ListGroup>
                     {this.props.relevantQuestions.length === 0 ? (
                         <ListGroupItem>No entries to show</ListGroupItem>
                     ) : (
@@ -28,16 +28,16 @@ class QuestionList extends Component {
 }
 
 function mapStateToProps({ questions, authedUser }, props) {
-  	const question_selector = props.questionSelector !== undefined ? props.questionSelector : props.match.params.question_selector
-	const querySelectorValid = question_selector === 'answered' || question_selector === 'unanswered'
+  	const category = props.category !== undefined ? props.category : props.match.params.category
+	const categoryValid = category === 'answered' || category === 'unanswered'
     
-    if(!querySelectorValid) {
+    if(!categoryValid) {
     	return {
         	showNotFoudPage: true
         }
     }
     
-  	const answered = question_selector === 'answered'
+  	const answered = category === 'answered'
 	
     const relevantQuestions = Object.values(questions).filter((question) => {
     	const votedOnQuestion =  question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser)
