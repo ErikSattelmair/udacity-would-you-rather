@@ -1,9 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-  Card, CardImg, CardTitle, CardText, Container, Row, Col,
-  CardSubtitle, CardBody
-} from 'reactstrap';
+import { Row, Container } from 'reactstrap';
+import User from './User'
 
 class LeaderBoard extends Component {
   	
@@ -12,20 +10,9 @@ class LeaderBoard extends Component {
     	
         return Object.keys(users).sort(this.sortUsersByQuestionAnsweredAskedCount).map((userId, rank) => {
 			const user = users[userId]
-			const numberOfQuestionsAsked = this.getNumberOfAskedQuestions(user)
-			const numberOfQuestionsAnswered = this.getNumberOfAnsweredQuestions(user)
             
-            return <Col sm={4} key={userId} className='mt-3'><Card>
-                  <CardImg top width="100%" src={user.avatarURL} alt={`Avatar of ${userId}`} />
-                  <CardBody>
-                      <CardTitle><b>{rank + 1}.</b> {userId}</CardTitle>
-                      <CardSubtitle>Statistic Summary</CardSubtitle>
-          			  <br />
-                      <CardText>Questions answered: {numberOfQuestionsAnswered}<br />Questions asked: {numberOfQuestionsAsked}</CardText>
-                  </CardBody>
-            </Card></Col>
-        	}
-		)
+            return <User key={userId} user={user} rank={rank + 1}/>
+		})
     }
 
   	sortUsersByQuestionAnsweredAskedCount = (user1Id, user2Id) => {
@@ -34,28 +21,20 @@ class LeaderBoard extends Component {
         return this.calculateTotalRankingNumber(users[user2Id]) - this.calculateTotalRankingNumber(users[user1Id])
 	}
         
-   	calculateTotalRankingNumber = (user) => {
-    	return this.getNumberOfAskedQuestions(user) + this.getNumberOfAnsweredQuestions(user)
-    }
-
-  	getNumberOfAskedQuestions = (user) => {
-    	return user.questions.length
-    }
-  
-  	getNumberOfAnsweredQuestions = (user) => {
-    	return user.answers === undefined ? 0 : Object.keys(user.answers).length
+	calculateTotalRankingNumber = (user) => {
+    	return user.questions.length + user.answers === undefined ? 0 : Object.keys(user.answers).length
     }
   	
   	render() {
     	return (
-        	<Fragment>
+        	<div>
       			<h3 className='text-center'>LeaderBoard</h3>
 				<Container>
              		<Row>
                			{ this.createLeaderBoardCards() }
             		</Row>
 				</Container>
-      		</Fragment>
+      		</div>
         )
     }
 }

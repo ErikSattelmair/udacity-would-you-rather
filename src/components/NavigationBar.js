@@ -11,22 +11,23 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Login from './Login'
+import Search from './Search'
 
 class NavigationBar extends Component {
 	
   	state = {
-    	dropdownOpen: false
+    	dropdownOpen: false,
     }
-
+	
 	toggle = () => {
     	this.setState({
     		dropdownOpen: !this.state.dropdownOpen
     	})
     }
   	
-  	render() {
+  	render() {      	
     	return (
         	<div>
 				<Navbar color="light" light expand="md">
@@ -49,9 +50,7 @@ class NavigationBar extends Component {
                           <NavItem>
                               <NavLink tag={Link} to="/add">Create Question</NavLink>
                           </NavItem>
-						  <NavItem>
-                              
-                          </NavItem>
+						  <Search />
 						  <Login />
                       </Nav>
 				</Navbar>
@@ -60,4 +59,4 @@ class NavigationBar extends Component {
     }
 }
 
-export default NavigationBar
+export default withRouter(NavigationBar)

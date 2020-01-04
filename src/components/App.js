@@ -12,6 +12,7 @@ import QuestionList from './QuestionList'
 import NotFound from './NotFound'
 import LoggedOut from './LoggedOut'
 import CreateUser from './CreateUser'
+import SearchResult from './SearchResult'
 
 class App extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends Component {
                             <Route path='/add' exact component={CreateQuestion} />
                             <Route path='/question/:question_id' exact component={Question} />
                             <Route path='/category/:category' exact component={QuestionList} />
+							<Route path='/search/:search_term' exact component={SearchResult} />
 							<Route path='/404' exact component={NotFound} />
 							<Route component={NotFound} />
 						</Switch>
