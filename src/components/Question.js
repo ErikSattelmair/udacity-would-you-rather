@@ -7,6 +7,7 @@ import {
   Label, Input, Form, FormGroup, Card, CardImg, CardTitle,
   CardSubtitle, CardBody, Button
 } from 'reactstrap'
+import { Pie } from 'react-chartjs-2'
 
 class Question extends Component {
   	
@@ -75,13 +76,32 @@ class Question extends Component {
 		const { timestamp, optionOne, optionTwo } = question
 		const authedUserVoted = this.isQuestionAnswered()
 		const authedUserVote = authedUserVoted ? this.calculateAuthedUserVote() : ''
-				
+        const pieData = [this.calculateOptionVote(optionOne), this.calculateOptionVote(optionTwo)]
+        const pieLabels = [optionOne.text, optionTwo.text]
+        const option = {
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var dataset = data.datasets[0];
+                var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                var total = meta.total;
+                var currentValue = dataset.data[tooltipItem.index];
+                var percentage = parseFloat((currentValue/total*100).toFixed(2));
+                return percentage + '% (total: ' +  currentValue + ')';
+              },
+              title: function(tooltipItem, data) {
+                return data.labels[tooltipItem[0].index];
+              }
+            }
+          }
+        }
+        
         return (
             <Card>
 				<CardImg top width="100%" src={questionAuthor.avatarURL} alt={`Avatar of ${questionAuthor.id}`} />
 				<CardBody>
-                    <CardTitle>Created on {this.convertTimestampToDateRepresentation(timestamp)} at {this.convertTimestampToTimeRepresentation(timestamp)} by { questionAuthor.id }</CardTitle>
-                    <CardSubtitle className='font-weight-bold'>Would you rather</CardSubtitle>
+                    <CardTitle><u>Created on {this.convertTimestampToDateRepresentation(timestamp)} at {this.convertTimestampToTimeRepresentation(timestamp)} by { questionAuthor.id }</u></CardTitle>
+                    <CardSubtitle className='font-weight-bold h4'>Would you rather</CardSubtitle>
 					<Form>
 						<FormGroup>
                         	<FormGroup check>
@@ -89,23 +109,25 @@ class Question extends Component {
                                 	<Input type="radio" value="optionOne" disabled={ authedUserVoted } checked={authedUserVote === 'optionOne'} onChange={(e) => this.onChange(e)} />
 									{question.optionOne.text}
                             	</Label>
-								{authedUserVoted && (
-									<Label>
-										(number of votes: {this.calculateOptionVote(optionOne)}, ratio: {this.calculateOptionTotalVoteRatio(optionOne)}%)
-									</Label>
-								)}
                         	</FormGroup>
                         	<FormGroup check>
                             	<Label check htmlFor="optionTwo">
                                 	<Input type="radio" value="optionTwo" disabled={ authedUserVoted } checked={authedUserVote === 'optionTwo'} onChange={(e) => this.onChange(e)} />
 									{question.optionTwo.text}
                             	</Label>
-								{authedUserVoted && (
-									<Label>
-										(number of votes: {this.calculateOptionVote(optionTwo)}, ratio: {this.calculateOptionTotalVoteRatio(optionTwo)}%)
-									</Label>
-								)}
                         	</FormGroup>
+							{authedUserVoted &&
+								<FormGroup>
+                                    <br />
+									<h4>Statistics</h4>
+                                    <Pie width={80} height={10} data={{
+                                        labels: pieLabels,
+                                        datasets: [{
+                                            data: pieData,
+                                            backgroundColor: ['red', 'blue']
+                                        }]
+                                    }} options={option} />
+							</FormGroup>}
 						</FormGroup>
 						{ authedUser === questionAuthor.id && (
                             <FormGroup>

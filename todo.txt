@@ -1,6 +1,6 @@
 ############################# Components #############################
 
-- Nav (check, außer optionale Eingabe der QuestionId)
+- Nav (check)
 --> Home, Categories, LeaderBoard, CreatePoll, Search-TextField*, Login 
 
 - Login (check)
@@ -36,11 +36,8 @@
 - Questions
 --> receiveQuestions (check)
 --> addQuestions (check)
---> deleteQuestions*
+--> deleteQuestions* (check)
 
 ######## TODOS ########
-- Seperate between QuestionAbstract and QuestionDetail
-- Add statistic section to answered questions including visualization pie chart of
-- Add delete option for questions of authed user
 - Finish Home
 - Add avatar pictures
