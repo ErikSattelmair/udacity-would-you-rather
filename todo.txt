@@ -39,7 +39,6 @@
 --> deleteQuestions*
 
 ######## TODOS ########
-- Add validation for avatar input file
 - Seperate between QuestionAbstract and QuestionDetail
 - Add statistic section to answered questions including visualization pie chart of
 - Add search bar in Header

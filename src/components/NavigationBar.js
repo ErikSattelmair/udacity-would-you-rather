@@ -49,6 +49,9 @@ class NavigationBar extends Component {
                           <NavItem>
                               <NavLink tag={Link} to="/add">Create Question</NavLink>
                           </NavItem>
+						  <NavItem>
+                              
+                          </NavItem>
 						  <Login />
                       </Nav>
 				</Navbar>

@@ -2,14 +2,33 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { Button, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class Login extends Component {
-  
+  	
+  	state = {
+    	prevPath: ''
+    }
+  	
+  	componentWillReceiveProps(nextProps) {
+  		this.setState({
+    		prevPath: this.props.location
+    	})
+    }
+  	
 	handleUserLogin = (userId) => {
-    	const { dispatch } = this.props
-		
+    	const { dispatch, history } = this.props
+		const { prevPath } = this.state
+        
         dispatch(setAuthedUser(userId))
+      	
+      	console.log(prevPath.pathname)
+      	if(prevPath.pathname.includes('/question/')) {
+			history.push(prevPath.pathname)
+        } else {
+        	history.push('/')
+        }
+      	
     }
 	
 	createDopdownEntries() {
@@ -19,9 +38,11 @@ class Login extends Component {
     }
 
 	handleUserLogout() {
-		const { dispatch } = this.props
+		const { dispatch, history } = this.props
 		
         dispatch(setAuthedUser(null))
+		
+		history.push('/')
     }
 	
 	createLoggedOutView() {
@@ -32,7 +53,7 @@ class Login extends Component {
 							{ this.createDopdownEntries() }
 						</DropdownMenu>
               		</UncontrolledDropdown>
-              		<Link to={'add_user'}><Button size='sm'>Create New Account</Button></Link>
+              		<Link to={'/add_user'}><Button size='sm'>Create New Account</Button></Link>
 			</Fragment>
     }
 
@@ -62,4 +83,4 @@ function mapStateToProps({ users, authedUser }) {
 	return { users, authedUser }
 }
 
-export default connect(mapStateToProps)(Login)
+export default withRouter(connect(mapStateToProps)(Login))

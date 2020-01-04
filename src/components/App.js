@@ -34,7 +34,7 @@ class App extends Component {
                       		<Route path='/' exact component={Home} />
                         	<Route path='/leaderboard' exact component={LeaderBoard} />
                             <Route path='/add' exact component={CreateQuestion} />
-                            <Route path='/questions/:question_id' exact component={Question} />
+                            <Route path='/question/:question_id' exact component={Question} />
                             <Route path='/category/:category' exact component={QuestionList} />
 							<Route path='/404' exact component={NotFound} />
 							<Route component={NotFound} />
