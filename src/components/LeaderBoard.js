@@ -22,7 +22,7 @@ class LeaderBoard extends Component {
 	}
         
 	calculateTotalRankingNumber = (user) => {
-    	return user.questions.length + user.answers === undefined ? 0 : Object.keys(user.answers).length
+      	return user.questions.length + (user.answers === undefined ? 0 : Object.keys(user.answers).length)
     }
   	
   	render() {

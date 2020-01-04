@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleUpdateUserAnswer } from '../actions/users'
-import { updateQuestionAnswers } from '../actions/questions'
+import { handleUpdateUserAnswer, handleDeleteUserAnswer } from '../actions/users'
+import { updateQuestionAnswers, handleRemoveQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
 import { 
   Label, Input, Form, FormGroup, Card, CardImg, CardTitle,
-  CardSubtitle, CardBody
+  CardSubtitle, CardBody, Button
 } from 'reactstrap'
 
 class Question extends Component {
@@ -58,13 +58,20 @@ class Question extends Component {
 		dispatch(handleUpdateUserAnswer(question.id, choesenOption))
 		dispatch(updateQuestionAnswers(authedUser, question.id, choesenOption))
     }
+
+	handleQuestionDelete(questionId) {
+    	const { dispatch } = this.props
+
+      	dispatch(handleRemoveQuestion(questionId))
+		dispatch(handleDeleteUserAnswer(questionId))
+    }
 	
   	render() {
       	if(this.props.showNotFoudPage) {
 			return <Redirect to={'/404'} />
         }
       	
-      	const { question, questionAuthor } = this.props
+      	const { question, questionAuthor, authedUser } = this.props
 		const { timestamp, optionOne, optionTwo } = question
 		const authedUserVoted = this.isQuestionAnswered()
 		const authedUserVote = authedUserVoted ? this.calculateAuthedUserVote() : ''
@@ -100,6 +107,11 @@ class Question extends Component {
 								)}
                         	</FormGroup>
 						</FormGroup>
+						{ authedUser === questionAuthor.id && (
+                            <FormGroup>
+                                <Button onClick={() => this.handleQuestionDelete(question.id)}>Delete Question</Button>
+                            </FormGroup>
+						)}
 					</Form>
 				</CardBody>
             </Card>

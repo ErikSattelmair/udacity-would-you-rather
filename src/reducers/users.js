@@ -1,4 +1,4 @@
-import { RECEIVE_USERS, UPDATE_USER_ANSWERS, ADD_USER } from '../actions/users'
+import { RECEIVE_USERS, UPDATE_USER_ANSWERS, ADD_USER, REMOVE_USER_ANSWER } from '../actions/users'
 
 export default function users(state = {}, action) {
 	switch(action.type) {
@@ -28,7 +28,35 @@ export default function users(state = {}, action) {
         	...state,
           	[user.id]: user
         }
+      case REMOVE_USER_ANSWER: {
+		const { questionId } = action
+        let newState = Object.assign({}, state)
         
-    default: return state 
+        Object.values(state)
+          	.filter((user) => Object.keys(user.answers).includes(questionId) || user.questions.includes(questionId))
+          	.forEach((user) => {
+                const updatedAnswers = Object.keys(user.answers).reduce((object, key) => {
+                  if (key !== questionId) {
+                    object[key] = newState[key]
+                  }
+                  return object
+                }, {})
+
+                const updatedQuestions = user.questions.filter((qid) => questionId !== qid)
+          	
+                newState = {
+                    ...newState,
+                  	[user.id]: {
+                        ...newState[user.id],
+                        answers: updatedAnswers,
+                      	questions: updatedQuestions
+                    }
+                }
+        })
+        
+        return newState
+	  }
+        
+      default: return state 
     }
 }

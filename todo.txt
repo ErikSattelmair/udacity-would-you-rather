@@ -41,7 +41,6 @@
 ######## TODOS ########
 - Seperate between QuestionAbstract and QuestionDetail
 - Add statistic section to answered questions including visualization pie chart of
-- Add search bar in Header
 - Add delete option for questions of authed user
 - Finish Home
 - Add avatar pictures

@@ -1,23 +1,25 @@
-import { ADD_QUESTION, RECEIVE_QUESTIONS, UPDATE_QUESTION_ANSWERS } from '../actions/questions'
+import { ADD_QUESTION, RECEIVE_QUESTIONS, UPDATE_QUESTION_ANSWERS, REMOVE_QUESTION } from '../actions/questions'
 
 export default function questions(state = {}, action) {
   	switch(action.type) {
-        case RECEIVE_QUESTIONS:
+        case RECEIVE_QUESTIONS: {
         	return {
         		...state, 
           		...action.questions
         	}
-    	case ADD_QUESTION: 
+        }
+    	case ADD_QUESTION: {
         	const { question } = action	
         
         	return {
         		...state,
               	[question.id]: question
             }
-      	case UPDATE_QUESTION_ANSWERS:
+        }
+      	case UPDATE_QUESTION_ANSWERS: {
         	const { userId, questionId, answer } = action
             
-            const res = {
+            return {
             	...state,
               	[questionId]: {
                 	...state[questionId],
@@ -27,10 +29,20 @@ export default function questions(state = {}, action) {
                     }
                 }
             }
+        }
+      	case REMOVE_QUESTION:
+        	const { questionId } = action
+        	
+        	const updatedQuestions = Object.keys(state).reduce((object, key) => {
+				if (key !== questionId) {
+                	object[key] = state[key]
+				}
+                    return object
+			}, {})
             
-            console.log(res)
-        	return res
-        
+            return {
+            	...updatedQuestions
+            }
       	default: return state
     }
 }

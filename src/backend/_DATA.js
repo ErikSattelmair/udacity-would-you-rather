@@ -325,3 +325,42 @@ function createUser(username, name, avatar) {
 		questions: []
     }
 }
+
+export function _removeQuestion(authedUser, qid) {
+	return new Promise((res, rej) => {
+        setTimeout(() => {
+          	const updatedQuestions = Object.keys(questions).reduce((object, key) => {
+              if (key !== qid) {
+                object[key] = questions[key]
+              }
+              return object
+            }, {})
+          	
+			questions = updatedQuestions
+
+          	const updatedUserAnswers = Object.keys(users[authedUser].answers).reduce((object, key) => {
+              if (key !== qid) {
+                object[key] = questions[key]
+              }
+              return object
+            }, {})
+            
+            const updatedUserQuestions = users[authedUser].questions.filter((questionId) => questionId !== qid)
+            
+			users = {
+                ...users,
+                [authedUser]: {
+                  ...users[authedUser],
+                  questions: updatedUserQuestions,
+                  amswers: {
+             		...updatedUserAnswers
+                  }
+                }
+      		}
+          
+          	console.log(users)
+          
+            res()
+		}, 1000)
+	})
+}

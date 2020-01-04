@@ -1,9 +1,10 @@
 import { showLoading, hideLoading } from 'react-redux-loading'
-import { _saveQuestion } from '../backend/_DATA'
+import { _saveQuestion, _removeQuestion } from '../backend/_DATA'
 
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const UPDATE_QUESTION_ANSWERS = 'UPDATE_QUESTION_ANSWERS'
+export const REMOVE_QUESTION = 'REMOVE_QUESTION'
 
 function addQuestion(question) {
 	return {
@@ -39,5 +40,25 @@ export function updateQuestionAnswers(userId, questionId, answer) {
       	questionId,
       	userId,
       	answer
+    }
+}
+
+export function handleRemoveQuestion(questionId) {
+	return (dispatch, getState) => {
+  		const { authedUser } = getState()
+
+      	dispatch(showLoading)
+
+        return _removeQuestion(
+        	authedUser,
+          	questionId
+        ).then(() => dispatch(removeQuestion(questionId))).then(() => dispatch(hideLoading()))
+    }
+}
+
+function removeQuestion(questionId) {
+	return {
+    	type: REMOVE_QUESTION,
+      	questionId
     }
 }

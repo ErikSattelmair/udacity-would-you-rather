@@ -1,9 +1,10 @@
 import { showLoading, hideLoading } from 'react-redux-loading'
-import { _saveQuestionAnswer, _saveUser } from '../backend/_DATA'
+import { _saveQuestionAnswer, _saveUser, _removeQuestion } from '../backend/_DATA'
 
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const UPDATE_USER_ANSWERS = 'UPDATE_USER_ANSWERS'
 export const ADD_USER = 'ADD_USER'
+export const REMOVE_USER_ANSWER = 'REMOVE_USER_ANSWER'
 
 export function receiveUsers(users) {
     return {
@@ -52,5 +53,26 @@ export function handleAddUser(username, name, avatar) {
           	name, 
           	avatar
         ).then((user) => dispatch(addUser(user)))
+    }
+}
+
+export function removeUserAnswer(authedUser, questionId) {
+    return {
+        type: REMOVE_USER_ANSWER,
+        authedUser,
+      	questionId
+    }
+}
+
+export function handleDeleteUserAnswer(questionId) {
+	return (dispatch, getState) => {
+		const { authedUser } = getState()
+
+      	dispatch(showLoading)      	
+      	
+		return _removeQuestion(
+        	authedUser, 
+          	questionId, 
+        ).then(() => dispatch(removeUserAnswer(authedUser, questionId)))
     }
 }
