@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Container } from 'reactstrap';
+import { Col, Row, Container } from 'reactstrap';
 import User from './User'
 import { getUsersSortedByRank } from '../utils/UserUtils'
 
@@ -10,7 +10,7 @@ class LeaderBoard extends Component {
       	const users = this.props.users
         
         return getUsersSortedByRank(users).map((userId, rank) => {
-            return <User key={userId} userId={userId}/>
+            return <Col sm={4} key={userId} className='mt-3'><User key={userId} userId={userId}/></Col>
 		})
     }
   	
