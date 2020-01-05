@@ -6,7 +6,7 @@ Would You Rather is the second milestone project of Udactiy's React nanodegree p
 
 The game principle is very simple as the goal is to answer questions that start with the phrase "Would you rather" and provide two possible options to chose from.
 
-Following actions can be used:
+Following actions can be performed:
 - **Login as an existing user**
 - **Create a new user account**
 - **View answered and unanswered questions**
@@ -14,6 +14,8 @@ Following actions can be used:
 - **See where you rank compared to other users on the leaderboard**
 - **Search questions and users by their id**
 - **Create an own question**
+
+Happy playing :)
 
 ## Run it
 
