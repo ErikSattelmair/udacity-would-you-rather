@@ -42,8 +42,8 @@ class Search extends Component {
 						<UncontrolledDropdown disabled={!searchPossible}>
                             <DropdownToggle caret size='sm' outline>Search by</DropdownToggle>
                             <DropdownMenu>
-                                <DropdownItem key='user' onClick={() => this.handleSearchRequest('user')}>User</DropdownItem>
-								<DropdownItem key='question' onClick={() => this.handleSearchRequest('question')}>Question</DropdownItem>
+                                <DropdownItem key='user' onClick={() => this.handleSearchRequest('user')}>User Id</DropdownItem>
+								<DropdownItem key='question' onClick={() => this.handleSearchRequest('question')}>Question Id</DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
 					</FormGroup>

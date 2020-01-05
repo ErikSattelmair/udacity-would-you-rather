@@ -10,12 +10,14 @@ class QuestionList extends Component {
         	return <Redirect to={'/404'} />
         }
       	
+		const headingText =  (this.props.answered ? 'Answered' : 'Unanswered') + ' Questions'
+           
     	return (
           	<div>
-				<h3 className='text-center'>{this.props.answered ? 'Answered' : 'Unanswered'} Questions</h3>
+				<h3 className='text-center'>{ headingText }</h3>
       			<ListGroup>
                     {this.props.relevantQuestions.length === 0 ? (
-                        <ListGroupItem>No entries to show</ListGroupItem>
+                        <ListGroupItem>No { headingText } available </ListGroupItem>
                     ) : (
                       this.props.relevantQuestions.map((question) => {
                               return <ListGroupItem key={question.id}><Question questionId={question.id}/></ListGroupItem>
