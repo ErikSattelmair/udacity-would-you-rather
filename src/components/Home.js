@@ -7,18 +7,20 @@ import { getRelevantQuestionsByCategory } from '../utils/questionUtils'
 
 class Home extends Component {
 	state = {
-    	relevantQuestions: getRelevantQuestionsByCategory(this.props.questions, 'unanswered', this.props.authedUser)
+    	category: 'unanswered'
     }
   	
 	handleToggle(evt) {
-    	const show = evt.target.value
+    	const category = evt.target.value
       
       	this.setState({
-    		relevantQuestions: getRelevantQuestionsByCategory(this.props.questions, show, this.props.authedUser)
+    		category: category
     	})
     }
 
   	render() {
+		const relevantQuestions = getRelevantQuestionsByCategory(this.props.questions, this.state.category, this.props.authedUser)
+      	
     	return (
         	<div>
       			<h3 className='text-center'>Home</h3>
@@ -29,7 +31,7 @@ class Home extends Component {
                                 <ButtonToggle color='secondary' value='unanswered' onClick={(evt) => this.handleToggle(evt)}>Unanswered Questions</ButtonToggle>{' '}
                                 <ButtonToggle color='secondary' value='answered' onClick={(evt) => this.handleToggle(evt)}>Answered Questions</ButtonToggle>
 							</Container>
-                            <QuestionList relevantQuestions={this.state.relevantQuestions} />
+                            <QuestionList relevantQuestions={relevantQuestions} />
 						</Col>
 						<Col>
 							<h4 className='text-center'>User information</h4>
@@ -42,10 +44,10 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps({ authedUser, questions }) {  
+function mapStateToProps({ authedUser, questions }) {    	
   	return { 
       	authedUser,
-		questions
+      	questions
     }
 }
 
