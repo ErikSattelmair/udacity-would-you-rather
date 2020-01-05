@@ -1,22 +1,17 @@
-import React, { Component } from 'react'
-import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap'
+import React, { Component, Fragment } from 'react'
+import { Container, Row, Col, Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getUsersSortedByRank } from '../utils/userUtils'
 
 class User extends Component {
   
-	render() {
-      	if(this.props.showNotFoudPage) {
-			return <Redirect to={'/404'} />
-        }
-      	
+  	createUserInfo() {
       	const { user, rank } = this.props
 		const numberOfQuestionsAsked = user.questions.length
 		const numberOfQuestionsAnswered = user.answers === undefined ? 0 : Object.keys(user.answers).length
-
-    	return (
-			<Card>
+        
+    	return 	<Card>
             	<CardImg top width="100%" src={user.avatarURL} alt={`Avatar of ${user.id}`} />
                 <CardBody>
                 	<CardTitle><b>{user.id}</b></CardTitle>
@@ -25,6 +20,24 @@ class User extends Component {
                     <CardText>Questions answered: {numberOfQuestionsAnswered}<br />Questions asked: {numberOfQuestionsAsked}</CardText>
 				</CardBody>
 			</Card>
+    }
+  	
+	render() {
+      	if(this.props.showNotFoudPage) {
+			return <Redirect to={'/404'} />
+        }
+      	
+		const userSearchedDirectly =  this.props.userId === undefined
+        const userInfo = this.createUserInfo()
+		
+    	return (
+			<Fragment>
+                {userSearchedDirectly ? (
+                    <Container><Row><Col sm="12" md={{ size: 6, offset: 3 }}>{userInfo}</Col></Row></Container>
+                ) : (
+                    userInfo
+                )}
+			</Fragment>
         )
     }
 }

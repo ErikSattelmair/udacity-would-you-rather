@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleUpdateUserAnswer, handleDeleteUserAnswer } from '../actions/users'
 import { updateQuestionAnswers, handleRemoveQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
 import { 
   Label, Input, Form, FormGroup, Card, CardImg, CardTitle,
-  CardSubtitle, CardBody, Button
+  CardSubtitle, CardBody, Button, Row, Col, Container
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import QuestionStatistics from './QuestionStatistics'
@@ -53,18 +53,13 @@ class Question extends Component {
 		dispatch(handleDeleteUserAnswer(questionId))
     }
 	
-  	render() {
-      	if(this.props.showNotFoudPage) {
-			return <Redirect to={'/404'} />
-        }
-      	
-      	const { question, questionAuthor, authedUser } = this.props
+	createQuestionInfo() {
+    	const { question, questionAuthor, authedUser } = this.props
 		const { timestamp } = question
 		const authedUserVoted = this.isQuestionAnswered()
 		const authedUserVote = authedUserVoted ? this.calculateAuthedUserVote() : ''
-        
-        return (
-            <Card>
+    	
+		return <Card>
 				<CardImg top width="100%" src={questionAuthor.avatarURL} alt={`Avatar of ${questionAuthor.id}`} />
 				<CardBody>
                     <CardTitle><u>Created on {this.convertTimestampToDateRepresentation(timestamp)} at {this.convertTimestampToTimeRepresentation(timestamp)} by <Link to={'/users/' + questionAuthor.id }>{ questionAuthor.id }</Link></u></CardTitle>
@@ -94,6 +89,24 @@ class Question extends Component {
 					</Form>
 				</CardBody>
             </Card>
+	}
+
+  	render() {
+      	if(this.props.showNotFoudPage) {
+			return <Redirect to={'/404'} />
+        }
+      	
+		const questionSearchedDirectly =  this.props.questionId === undefined
+        const questionInfo = this.createQuestionInfo()
+        
+        return (
+            <Fragment>
+				{questionSearchedDirectly ? (
+                    <Container><Row><Col sm="12" md={{ size: 6, offset: 3 }}>{questionInfo}</Col></Row></Container>
+                ) : (
+                    questionInfo
+                )}
+			</Fragment>
         )
     }
 }
