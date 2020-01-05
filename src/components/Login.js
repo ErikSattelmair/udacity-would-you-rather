@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { Form, FormGroup, Button, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Form, FormGroup, Button, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom'
 
 class Login extends Component {
@@ -69,13 +69,11 @@ class Login extends Component {
 		const { authedUser } = this.props
       	
     	return (
-            <NavItem>
-				<Form inline className='mt-1'>
-      				<FormGroup>
-              			{ authedUser === null ? this.createLoggedOutView() : this.createLoggedInView(authedUser) }
-	      			</FormGroup>
-				</Form>
-            </NavItem>
+			<Form inline>
+      			<FormGroup>
+              		{ authedUser === null ? this.createLoggedOutView() : this.createLoggedInView(authedUser) }
+	      		</FormGroup>
+			</Form>
         )
     }
 }
