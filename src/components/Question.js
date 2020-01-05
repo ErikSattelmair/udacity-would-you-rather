@@ -7,7 +7,7 @@ import {
   Label, Input, Form, FormGroup, Card, CardImg, CardTitle,
   CardSubtitle, CardBody, Button
 } from 'reactstrap'
-import { Pie } from 'react-chartjs-2'
+import QuestionStatistics from './QuestionStatistics'
 
 class Question extends Component {
   	
@@ -20,21 +20,6 @@ class Question extends Component {
 
 	convertTimestampToTimeRepresentation = (timestamp) => {
 		return new Date(timestamp * 1e3).toISOString().slice(-13, -5)
-    }
-  	
-	calculateTotalVotes() {
-    	const question = this.props.question
-      	const totalVotes = question.optionOne.votes.concat(question.optionTwo.votes)
-		
-		return totalVotes.length
-    }
-
-	calculateOptionVote(option) {
-    	return option.votes.length
-    }
-	
-	calculateOptionTotalVoteRatio(option) {
-    	return (this.calculateOptionVote(option) / this.calculateTotalVotes() * 100).toFixed(2)
     }
 	
 	isQuestionAnswered() {
@@ -73,35 +58,16 @@ class Question extends Component {
         }
       	
       	const { question, questionAuthor, authedUser } = this.props
-		const { timestamp, optionOne, optionTwo } = question
+		const { timestamp } = question
 		const authedUserVoted = this.isQuestionAnswered()
 		const authedUserVote = authedUserVoted ? this.calculateAuthedUserVote() : ''
-        const pieData = [this.calculateOptionVote(optionOne), this.calculateOptionVote(optionTwo)]
-        const pieLabels = [optionOne.text, optionTwo.text]
-        const option = {
-          tooltips: {
-            callbacks: {
-              label: function(tooltipItem, data) {
-                var dataset = data.datasets[0];
-                var meta = dataset._meta[Object.keys(dataset._meta)[0]];
-                var total = meta.total;
-                var currentValue = dataset.data[tooltipItem.index];
-                var percentage = parseFloat((currentValue/total*100).toFixed(2));
-                return percentage + '% (total: ' +  currentValue + ')';
-              },
-              title: function(tooltipItem, data) {
-                return data.labels[tooltipItem[0].index];
-              }
-            }
-          }
-        }
         
         return (
             <Card>
 				<CardImg top width="100%" src={questionAuthor.avatarURL} alt={`Avatar of ${questionAuthor.id}`} />
 				<CardBody>
                     <CardTitle><u>Created on {this.convertTimestampToDateRepresentation(timestamp)} at {this.convertTimestampToTimeRepresentation(timestamp)} by { questionAuthor.id }</u></CardTitle>
-                    <CardSubtitle className='font-weight-bold h4'>Would you rather</CardSubtitle>
+                    <CardSubtitle className='font-weight-bold h4 mb-1'>Would you rather</CardSubtitle>
 					<Form>
 						<FormGroup>
                         	<FormGroup check>
@@ -116,18 +82,8 @@ class Question extends Component {
 									{question.optionTwo.text}
                             	</Label>
                         	</FormGroup>
-							{authedUserVoted &&
-								<FormGroup>
-                                    <br />
-									<h4>Statistics</h4>
-                                    <Pie width={80} height={10} data={{
-                                        labels: pieLabels,
-                                        datasets: [{
-                                            data: pieData,
-                                            backgroundColor: ['red', 'blue']
-                                        }]
-                                    }} options={option} />
-							</FormGroup>}
+							{authedUserVoted && <QuestionStatistics question={question} />
+								}
 						</FormGroup>
 						{ authedUser === questionAuthor.id && (
                             <FormGroup>

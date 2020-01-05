@@ -41,3 +41,4 @@
 ######## TODOS ########
 - Finish Home
 - Add avatar pictures
+- Finish README
