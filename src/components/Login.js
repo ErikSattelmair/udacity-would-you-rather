@@ -45,7 +45,7 @@ class Login extends Component {
 	createLoggedOutView() {
 		return <Fragment>
       			<UncontrolledDropdown className='mr-1'>
-                        <DropdownToggle caret size='sm' outline >Login as</DropdownToggle>
+                        <DropdownToggle caret size='sm' outline>Login as</DropdownToggle>
                         <DropdownMenu>
                             { this.createDopdownEntries() }
                         </DropdownMenu>
@@ -58,7 +58,7 @@ class Login extends Component {
       	const loggedInUser = this.props.users[loggedInUserId]
 
       	return <UncontrolledDropdown>
-            <DropdownToggle caret size='sm' outline>Welcome, { loggedInUserId } <img src={loggedInUser.avatarURL} alt={`(avatar of ${loggedInUserId})`} /></DropdownToggle>
+            <DropdownToggle caret size='sm' outline>Welcome, { loggedInUserId } <img src={loggedInUser.avatarURL} width={42} height={42} alt={`(avatar of ${loggedInUserId})`} /></DropdownToggle>
             <DropdownMenu>
 				<DropdownItem onClick={() => this.handleUserLogout()}>Logout</DropdownItem>
             </DropdownMenu>

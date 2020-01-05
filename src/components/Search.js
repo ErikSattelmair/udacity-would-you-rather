@@ -10,6 +10,7 @@ import {
   FormGroup
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Search extends Component {
 	state = {
@@ -32,7 +33,7 @@ class Search extends Component {
 	}
   	
   	render() {
-		const searchPossible = this.state.searchTerm.length > 0
+		const searchPossible = this.props.authedUser && this.state.searchTerm.length > 0
 
     	return (
 			<NavItem>
@@ -53,4 +54,8 @@ class Search extends Component {
     }
 }
 
-export default withRouter(Search)
+function mapStateToProps({ authedUser }) {
+	return { authedUser }
+}
+
+export default withRouter(connect(mapStateToProps)(Search))

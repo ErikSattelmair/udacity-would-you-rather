@@ -29,15 +29,14 @@ class Search extends Component {
   	
   	render() {
       	const { searchTerm, selector, users, questions } = this.props
-      	const results = selector === 'user' ? this.createUserSearchResults(searchTerm, users) : this.createQuestionSearchResults(searchTerm, questions)
+		const results = selector === 'user' ? this.createUserSearchResults(searchTerm, users) : this.createQuestionSearchResults(searchTerm, questions)		
 
-		
     	return (
           	<div>
 				<h3 className='text-center'>Search Results</h3>
 				<Container>
           			{results.length > 0 
-          				? ({results}) 
+          				? (results) 
 						: (<h4 className='text-center mt-5'>No results found</h4>)} 
           		</Container>
           	</div>
