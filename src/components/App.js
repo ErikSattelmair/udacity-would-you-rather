@@ -8,11 +8,12 @@ import NavigationBar from './NavigationBar'
 import LeaderBoard from './LeaderBoard'
 import CreateQuestion from './CreateQuestion'
 import Question from './Question'
-import QuestionList from './QuestionList'
+import Category from './Category'
 import NotFound from './NotFound'
 import LoggedOut from './LoggedOut'
 import CreateUser from './CreateUser'
 import SearchResult from './SearchResult'
+import User from './User'
 
 class App extends Component {
   componentDidMount() {
@@ -36,7 +37,8 @@ class App extends Component {
                         	<Route path='/leaderboard' exact component={LeaderBoard} />
                             <Route path='/add' exact component={CreateQuestion} />
                             <Route path='/question/:question_id' exact component={Question} />
-                            <Route path='/category/:category' exact component={QuestionList} />
+							<Route path='/users/:user_id' exact component={User} />
+                            <Route path='/category/:category' exact component={Category} />
 							<Route path='/search/:search_term' exact component={SearchResult} />
 							<Route path='/404' exact component={NotFound} />
 							<Route component={NotFound} />

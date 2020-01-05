@@ -19,9 +19,7 @@ class Search extends Component {
   	
   	createUserSearchResults(searchTerm, users) {
       return Object.keys(users).sort(this.sortUsersByQuestionAnsweredAskedCount).filter((userId) => searchTerm === userId).map((userId, rank) => {
-			const user = users[userId]
-            
-            return <User key={userId} user={user} rank={rank + 1}/>
+            return <User key={userId} userId={userId} />
 		})
     }
 

@@ -39,8 +39,6 @@
 --> deleteQuestions* (check)
 
 ######## TODOS ########
-- Create a Seperate Coategory Component
 - Finish Home
-- Link to User from Question
-- Add avatar pictures
 - Finish README
+- Add avatar pictures

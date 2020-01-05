@@ -7,6 +7,7 @@ import {
   Label, Input, Form, FormGroup, Card, CardImg, CardTitle,
   CardSubtitle, CardBody, Button
 } from 'reactstrap'
+import { Link } from 'react-router-dom'
 import QuestionStatistics from './QuestionStatistics'
 
 class Question extends Component {
@@ -66,7 +67,7 @@ class Question extends Component {
             <Card>
 				<CardImg top width="100%" src={questionAuthor.avatarURL} alt={`Avatar of ${questionAuthor.id}`} />
 				<CardBody>
-                    <CardTitle><u>Created on {this.convertTimestampToDateRepresentation(timestamp)} at {this.convertTimestampToTimeRepresentation(timestamp)} by { questionAuthor.id }</u></CardTitle>
+                    <CardTitle><u>Created on {this.convertTimestampToDateRepresentation(timestamp)} at {this.convertTimestampToTimeRepresentation(timestamp)} by <Link to={'/users/' + questionAuthor.id }>{ questionAuthor.id }</Link></u></CardTitle>
                     <CardSubtitle className='font-weight-bold h4 mb-1'>Would you rather</CardSubtitle>
 					<Form>
 						<FormGroup>

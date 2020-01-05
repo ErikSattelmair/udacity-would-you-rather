@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, ButtonToggle } from "reactstrap";
 import { connect } from 'react-redux'
-import QuestionList from './QuestionList'
+import Category from './Category'
 
 class Home extends Component {
 	state = {
@@ -22,7 +22,7 @@ class Home extends Component {
       			<h3 className='text-center'>Home</h3>
 				<ButtonToggle color='secondary' value='unanswered' onClick={(evt) => this.handleToggle(evt)}>Unanswered Questions</ButtonToggle>{' '}
 				<ButtonToggle color='secondary' value='answered' onClick={(evt) => this.handleToggle(evt)}>Answered Questions</ButtonToggle>
-				<QuestionList category={this.state.show} />
+				<Category category={this.state.show} />
 			</div>
         )
     }
