@@ -3,7 +3,7 @@ import { Container, Row, Col, ButtonToggle } from "reactstrap";
 import { connect } from 'react-redux'
 import QuestionList from './QuestionList'
 import User from './User'
-import { getRelevantQuestionsByCategory } from '../utils/QuestionUtils'
+import { getRelevantQuestionsByCategory } from '../utils/questionUtils'
 
 class Home extends Component {
 	state = {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Col, Row, Container } from 'reactstrap';
 import User from './User'
-import { getUsersSortedByRank } from '../utils/UserUtils'
+import { getUsersSortedByRank } from '../utils/userUtils'
 
 class LeaderBoard extends Component {
   	

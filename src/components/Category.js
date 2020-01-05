@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import QuestionList from './QuestionList'
-import { getRelevantQuestionsByCategory } from '../utils/QuestionUtils'
+import { getRelevantQuestionsByCategory } from '../utils/questionUtils'
 
 class Category extends Component {
 	render() {

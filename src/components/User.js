@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getUsersSortedByRank } from '../utils/UserUtils'
+import { getUsersSortedByRank } from '../utils/userUtils'
 
 class User extends Component {
   
