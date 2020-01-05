@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, ButtonToggle } from "reactstrap";
 import { connect } from 'react-redux'
-import Category from './Category'
+import QuestionList from './QuestionList'
 import User from './User'
+import { getRelevantQuestionsByCategory } from '../utils/QuestionUtils'
 
 class Home extends Component {
 	state = {
-    	show: 'unanswered'
+    	relevantQuestions: getRelevantQuestionsByCategory(this.props.questions, 'unanswered', this.props.authedUser)
     }
   	
 	handleToggle(evt) {
     	const show = evt.target.value
       
       	this.setState({
-    		show: show
+    		relevantQuestions: getRelevantQuestionsByCategory(this.props.questions, show, this.props.authedUser)
     	})
     }
 
@@ -24,11 +25,14 @@ class Home extends Component {
 				<Container>
              		<Row>
              			<Col>
-                            <ButtonToggle color='secondary' value='unanswered' onClick={(evt) => this.handleToggle(evt)}>Unanswered Questions</ButtonToggle>{' '}
-                            <ButtonToggle color='secondary' value='answered' onClick={(evt) => this.handleToggle(evt)}>Answered Questions</ButtonToggle>
-                            <Category category={this.state.show} />
+                            <Container className='text-center mb-2'>
+                                <ButtonToggle color='secondary' value='unanswered' onClick={(evt) => this.handleToggle(evt)}>Unanswered Questions</ButtonToggle>{' '}
+                                <ButtonToggle color='secondary' value='answered' onClick={(evt) => this.handleToggle(evt)}>Answered Questions</ButtonToggle>
+							</Container>
+                            <QuestionList relevantQuestions={this.state.relevantQuestions} />
 						</Col>
 						<Col>
+							<h4 className='text-center'>User information</h4>
 							<User userId={this.props.authedUser} />
 						</Col>
 					</Row>
@@ -38,8 +42,11 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps({ authedUser }) {
-	return { authedUser }
+function mapStateToProps({ authedUser, questions }) {  
+  	return { 
+      	authedUser,
+		questions
+    }
 }
 
 export default connect(mapStateToProps)(Home) 

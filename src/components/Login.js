@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { Form, FormGroup, Button, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -43,17 +43,15 @@ class Login extends Component {
 	}
 	
 	createLoggedOutView() {
-		return <Form inline>
-      			<FormGroup>
-                    <UncontrolledDropdown>
+		return <Fragment>
+      			<UncontrolledDropdown className='mr-1'>
                         <DropdownToggle caret size='sm' outline >Login as</DropdownToggle>
                         <DropdownMenu>
                             { this.createDopdownEntries() }
                         </DropdownMenu>
                     </UncontrolledDropdown><Link to={'/add_user'}>
                     <Button size='sm' outline >Create New Account</Button></Link>
-				</FormGroup>
-			</Form>
+				</Fragment>
     }
 
 	createLoggedInView(loggedInUserId) {
@@ -72,7 +70,11 @@ class Login extends Component {
       	
     	return (
             <NavItem>
-              { authedUser === null ? this.createLoggedOutView() : this.createLoggedInView(authedUser) }
+				<Form inline className='mt-1'>
+      				<FormGroup>
+              			{ authedUser === null ? this.createLoggedOutView() : this.createLoggedInView(authedUser) }
+	      			</FormGroup>
+				</Form>
             </NavItem>
         )
     }

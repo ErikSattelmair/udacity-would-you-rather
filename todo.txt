@@ -39,6 +39,5 @@
 --> deleteQuestions* (check)
 
 ######## TODOS ########
-- Finish Home
 - Finish README
 - Add avatar pictures

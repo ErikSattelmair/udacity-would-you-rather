@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import QuestionList from './QuestionList'
+import { getRelevantQuestionsByCategory } from '../utils/QuestionUtils'
 
 class Category extends Component {
 	render() {
@@ -9,7 +10,7 @@ class Category extends Component {
         	return <Redirect to={'/404'} />
         }
         
-		const headingText =  (this.props.answered ? 'Answered' : 'Unanswered') + ' Questions'
+		const headingText =  (this.props.category === 'answered' ? 'Answered' : 'Unanswered') + ' Questions'
 
 		return (
         	<div>
@@ -29,28 +30,12 @@ function mapStateToProps({ questions, authedUser }, props) {
         	showNotFoudPage: true
         }
     }
-    
-  	const answered = category === 'answered'
-	
-    const relevantQuestions = Object.values(questions).filter((question) => {
-    	const votedOnQuestion =  question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser)
-      	
-      	if(answered && votedOnQuestion) {
-			return question
-        }
-      	
-        if(!answered && !votedOnQuestion) {
-        	return question
-        }
-      	
-      	return null
-    }).sort((questionOne, questionTwo) => {
-    	return questionTwo.timestamp - questionOne.timestamp
-    })
-    
+
+    const relevantQuestions = getRelevantQuestionsByCategory(questions, category, authedUser)
+          
     return {
 		relevantQuestions,
-      	answered
+      	category
     }
 }
 

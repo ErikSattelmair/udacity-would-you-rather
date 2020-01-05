@@ -51,8 +51,12 @@ class NavigationBar extends Component {
                               <NavLink tag={Link} to="/add">Create Question</NavLink>
                           </NavItem>
 						  <Search />
-						  <Login />
                       </Nav>
+					  <Nav className='ml-auto'>
+						<NavItem>
+							<Login />
+						</NavItem>
+					  </Nav>
 				</Navbar>
           	</div>
         )

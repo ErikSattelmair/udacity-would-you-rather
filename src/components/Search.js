@@ -38,7 +38,7 @@ class Search extends Component {
 			<NavItem>
 				<Form inline>
 					<FormGroup>
-						<Input type="text" name="search" id="search" placeholder="input search term here..." onChange={(e) => this.handleSearchTermInput(e)}/>
+						<Input className='mr-2' type="text" name="search" id="search" placeholder="input search term here..." onChange={(e) => this.handleSearchTermInput(e)}/>
 						<UncontrolledDropdown disabled={!searchPossible}>
                             <DropdownToggle caret size='sm' outline>Search by</DropdownToggle>
                             <DropdownMenu>
