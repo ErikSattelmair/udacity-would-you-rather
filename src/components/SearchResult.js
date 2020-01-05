@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
-import { Container } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import User from './User'
 import Question from './Question'
 
@@ -34,11 +34,11 @@ class Search extends Component {
     	return (
           	<div>
 				<h3 className='text-center'>Search Results</h3>
-				<Container>
+				<Container><Row><Col sm="12" md={{ size: 6, offset: 3 }}>
           			{results.length > 0 
           				? (results) 
 						: (<h4 className='text-center mt-5'>No results found</h4>)} 
-          		</Container>
+          		</Col></Row></Container>
           	</div>
         )
     }

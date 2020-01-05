@@ -11,8 +11,8 @@ class QuestionList extends Component {
                         <ListGroupItem>No { this.props.questionCategory } available </ListGroupItem>
                     ) : (
                       this.props.relevantQuestions.map((question) => {
-                              return <ListGroupItem key={question.id}><Question questionId={question.id}/></ListGroupItem>
-                          })
+						return <ListGroupItem key={question.id}><Question questionId={question.id}/></ListGroupItem>
+					  })
                     )}
 				</ListGroup>
       		</Fragment>

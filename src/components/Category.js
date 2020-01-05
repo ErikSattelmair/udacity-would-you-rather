@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import QuestionList from './QuestionList'
 import { getRelevantQuestionsByCategory } from '../utils/questionUtils'
+import { Container, Row, Col } from 'reactstrap'
 
 class Category extends Component {
 	render() {
@@ -15,7 +16,7 @@ class Category extends Component {
 		return (
         	<div>
 				<h3 className='text-center'>{ headingText }</h3>
-      			<QuestionList relevantQuestions={this.props.relevantQuestions} questionCategory={headingText} />
+      			<Container><Row><Col sm="12" md={{ size: 6, offset: 3 }}><QuestionList relevantQuestions={this.props.relevantQuestions} questionCategory={headingText} /></Col></Row></Container>
       		</div>
       )
 	}
