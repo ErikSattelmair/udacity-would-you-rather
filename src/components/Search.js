@@ -40,7 +40,7 @@ class Search extends Component {
 					<FormGroup>
 						<Input className='mr-2' type="text" name="search" id="search" placeholder="input search term here..." onChange={(e) => this.handleSearchTermInput(e)}/>
 						<UncontrolledDropdown disabled={!searchPossible}>
-                            <DropdownToggle caret size='sm' outline>Search by</DropdownToggle>
+                            <DropdownToggle caret size='sm' outline>{searchPossible ? 'Search by' : <s>Search by</s>}</DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem key='user' onClick={() => this.handleSearchRequest('user')}>User Id</DropdownItem>
 								<DropdownItem key='question' onClick={() => this.handleSearchRequest('question')}>Question Id</DropdownItem>
